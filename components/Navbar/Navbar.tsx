@@ -26,7 +26,7 @@ export const Navbar = () => {
             </li>
             <li>
               <Link href={`/${userName}`} passHref>
-                <img src={user?.photoUrl} alt={userName} />
+                <img src={user?.photoURL} alt={userName} />
               </Link>
             </li>
           </>
