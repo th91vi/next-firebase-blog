@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../lib/context';
 import { auth, googleAuthProvider } from '../lib/firebase';
 
 const SignInButton = () => {
@@ -27,13 +28,12 @@ const UsernameForm = () => {
 };
 
 const EnterPage = () => {
-  const user = null;
-  const username = null;
+  const { user, userName } = useContext(UserContext);
 
   return (
     <main>
       {user ? (
-        !username ? (
+        !userName ? (
           <UsernameForm />
         ) : (
           <SignOutButton />
