@@ -61,7 +61,5 @@ export const getServerSideProps = async () => {
 
   const posts = (await postsQuery.get()).docs.map(postToJSON);
 
-  console.log(posts);
-
   return { props: { posts } };
 };
