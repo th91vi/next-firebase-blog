@@ -31,10 +31,17 @@ export const getStaticProps = async ({ params }) => {
   let path;
 
   if (userDoc) {
-    const postRef = userDoc.ref.collection('posts').doc(slug);
-    post = postToJSON(await postRef.get());
+    const postsQuery = userDoc.ref
+      .collection('posts')
+      .where('slug', '==', slug)
+      .limit(1);
+    const posts = (await postsQuery.get()).docs.map(postToJSON);
+    post = posts[0];
 
+    const postRef = userDoc.ref.collection('posts').doc(slug);
     path = postRef.path;
+  } else {
+    console.warn('No Document Found...');
   }
 
   return { props: { post, path }, revalidate: 5000 };
