@@ -1,5 +1,6 @@
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { PostContent } from '../../components/PostContent';
+import { Metatags } from '../../components/Metatags';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
 const PostPage = (props) => {
@@ -9,6 +10,7 @@ const PostPage = (props) => {
   const post = realTimePost || props.post;
   return (
     <main>
+      <Metatags title={post?.title} />
       <section>
         <PostContent post={post} />
       </section>
