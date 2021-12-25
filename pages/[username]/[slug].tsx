@@ -52,7 +52,7 @@ export const getStaticProps = async ({ params }) => {
 export const getStaticPaths = async () => {
   const snapshot = await firestore.collectionGroup('posts').get();
   const paths = snapshot.docs.map((doc) => {
-    const { slug, username } = doc.data();
+    const { slug, userName: username } = doc.data();
     return { params: { slug, username } };
   });
   return { paths, fallback: 'blocking' };

@@ -11,9 +11,9 @@ export const PostContent = ({ post }) => {
       <h1>{post?.title}</h1>
       <span className="text-sm">
         Written by
-        <Link href={`/${post.username}/`}>
+        <Link href={`/${post.userName}/`}>
           <a href="" className="text-info">
-            @{post.username}
+            @{post.userName}
           </a>
         </Link>{' '}
         on {createdAt.toISOString()}

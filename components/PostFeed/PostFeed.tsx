@@ -6,13 +6,13 @@ export const PostItem = ({ post, admin = false }) => {
 
   return (
     <div className="card">
-      <Link href={`/${post.username}`}>
+      <Link href={`/${post.userName}`}>
         <a>
-          <strong>By @{post.username}</strong>
+          <strong>By @{post.userName}</strong>
         </a>
       </Link>
 
-      <Link href={`/${post.username}/${post.slug}`}>
+      <Link href={`/${post.userName}/${post.slug}`}>
         <h2>
           <a>{post.title}</a>
         </h2>
