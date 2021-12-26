@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { useForm } from 'react-hook-form';
 import { AuthCheck } from '../../components/AuthCheck';
+import { ImageUploader } from '../../components/ImageUploader';
 import { auth, firestore, serverTimeStamp } from '../../lib/firebase';
 import styles from '../../styles/Admin.module.css';
 
@@ -96,6 +97,7 @@ const PostForm = ({ defaultValues, postRef, preview }) => {
 
       {!preview && (
         <div className={styles.controls}>
+          <ImageUploader />
           <textarea
             name="content"
             {...register('content', {
