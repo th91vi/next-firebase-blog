@@ -2,6 +2,9 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { PostContent } from '../../components/PostContent';
 import { Metatags } from '../../components/Metatags';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
+import { AuthCheck } from '../../components/AuthCheck';
+import { HeartButton } from '../../components/HeartButton/HeartButton';
+import Link from 'next/link';
 
 const PostPage = (props) => {
   const postRef = firestore.doc(props.path);
@@ -18,6 +21,16 @@ const PostPage = (props) => {
         <p>
           <strong>{post.heartCount || 0} ❤️</strong>
         </p>
+
+        <AuthCheck
+          fallback={
+            <Link href={'/enter'} passHref>
+              <button type="button">❤️ Sign up</button>
+            </Link>
+          }
+        >
+          <HeartButton postRef={postRef} />
+        </AuthCheck>
       </aside>
     </main>
   );
