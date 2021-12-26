@@ -61,10 +61,19 @@ const PostManager = () => {
 };
 
 const PostForm = ({ defaultValues, postRef, preview }) => {
-  const { register, handleSubmit, reset, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });
+
+  const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({
@@ -87,7 +96,17 @@ const PostForm = ({ defaultValues, postRef, preview }) => {
 
       {!preview && (
         <div className={styles.controls}>
-          <textarea name="content" {...register('content')}></textarea>
+          <textarea
+            name="content"
+            {...register('content', {
+              required: 'Content is required',
+              maxLength: {
+                value: 20000,
+                message: 'Content is too long',
+              },
+              minLength: { value: 10, message: 'Content is too short' },
+            })}
+          ></textarea>
           <fieldset>
             <input
               type="checkbox"
@@ -97,7 +116,14 @@ const PostForm = ({ defaultValues, postRef, preview }) => {
             />
             <label>Published</label>
           </fieldset>
-          <button type="submit" className="btn-green">
+          {errors.content && (
+            <p className="text-danger">{errors.content.message}</p>
+          )}
+          <button
+            type="submit"
+            className="btn-green"
+            disabled={!isDirty || !isValid}
+          >
             Save changes
           </button>
         </div>
